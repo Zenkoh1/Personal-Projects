@@ -180,10 +180,6 @@ def check_for_quit():
             pygame.display.quit()
             pygame.quit()
             return True
-        elif event.type == pygame.KEYDOWN:
-            if event.key == K_SPACE:
-                print('lol')
-                return True
     
     
 sudoku_display = pygame.display.set_mode((width,height)) # so other files can access it
