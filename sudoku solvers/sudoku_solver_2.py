@@ -10,7 +10,7 @@ RED = (255, 0, 0)
 
 def solve(board, start_time):
     find = find_min(board)
-    stop_solve
+    
     if not find:
         return True
     else:
