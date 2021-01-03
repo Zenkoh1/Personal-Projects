@@ -103,8 +103,10 @@ class Button:
                 if self.active:
                     return True
     
+
 def create_game_board(board, board_timers, difficulty):
     global final_time
+    # some math to draw the sudoku board
     for x in range(10):
         if x % 3 == 0:
             line_width = 5

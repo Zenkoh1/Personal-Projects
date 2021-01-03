@@ -44,13 +44,11 @@ def game_win(player):
     global game
     if player == 'draw':
         text = GAME_FONT.render('Draw!', True, ORANGE)
-        print('draw')
     else:
         text = GAME_FONT.render(player +" wins!", True, ORANGE)
-        print(player +'wins')
+
     text_rect = text.get_rect(center=(width/2, 50))
     gameDisplay.blit(text, text_rect)
-    print('neither')
     game = False
 
 def game_reset():
