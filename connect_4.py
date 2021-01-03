@@ -7,11 +7,12 @@ import time
 import itertools
 import random
 import math
+
 pygame.init()
 width = 770
 height = 760
 gameDisplay = pygame.display.set_mode((width,height))
-pygame.display.set_caption('Pong')
+pygame.display.set_caption('Connect 4')
 clock = pygame.time.Clock()
 WHITE = (255, 255, 255)
 BLUE = (46, 61, 215 )
@@ -38,6 +39,7 @@ def draw_display():
         for y in range(6):
             pygame.draw.circle(gameDisplay, colour_dict[board[y][x]], (55+ x * 110, 155 + y*110), 44)
 
+#draw win/draw text
 def game_win(player):
     global game
     if player == 'draw':
@@ -94,7 +96,8 @@ def add_sim_board(sim_board, column, turn_number):
         else:
             break
 
-
+# Check if there is a win, with whether it is a simulation or not as an input
+# If it isn't a simulated win, the game needs to stop and the win/draw text needs to be shown
 def check_win(board, turn_number, sim): #or draw
 
     if len(get_valid_locations(board)) == 0 and not sim:
@@ -144,7 +147,7 @@ def confirm_win(turn_number, sim):
     
 
 
-#Minimax algorithm
+
 
 def eval_window(window, turn_number):
     if turn_number == 1:
@@ -167,7 +170,8 @@ def eval_window(window, turn_number):
         score -= 5
 
     return score
-    
+
+#get score
 def score_position(sim_board ,turn_number):
     score = 0
     # draw state
@@ -205,9 +209,11 @@ def score_position(sim_board ,turn_number):
             score += eval_window(window, turn_number)
     return score
 
+#check if the minimax tree terminates
 def is_terminal_node(sim_board):
     return check_win(sim_board, 1, True) or check_win(sim_board, 2, True) or len(get_valid_locations(sim_board)) == 0
 
+#Minimax algorithm
 def minimax(board, depth, alpha, beta, maximising_player):
     turn_number = player_turn
     if turn_number == 1:
@@ -276,6 +282,7 @@ player_AI = {
     1 : False,
     2 : True
 }
+
 #game loop
 while not crashed:
     mos_x, mos_y = pygame.mouse.get_pos()

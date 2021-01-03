@@ -13,14 +13,18 @@ clock = pygame.time.Clock()
 WHITE = (255, 255, 255)
 GAME_FONT = pygame.freetype.SysFont("Sans Serif", 45)
 #draw lines
+
 p1_score = 0
 p2_score = 0
+
 def draw_display():
     game_display.fill((0,0,0))
     for x in range(int(height/15)):
         pygame.draw.rect(game_display, WHITE, pygame.Rect(width/2 - 10/2, 5 + 20*x, 4, 15)) 
     GAME_FONT.render_to(game_display, (width/2 - 50, 20), str(p1_score),  WHITE)
     GAME_FONT.render_to(game_display, (width/2 + 22 , 20), str(p2_score), WHITE)
+
+#The paddles
 class Player:
     def __init__(self, xPos, side, up_key, down_key):
         self.xPos = xPos
@@ -53,8 +57,8 @@ class Player:
         self.y_contact_point = [self.yPos, self.yPos + self.height]
         self.middle = self.yPos + self.height/2
 
+
     def AI_control(self):
-        
         if (self.xPos > width/2 and ball.xSpeed > 0) or (self.xPos < width/2 and ball.xSpeed <0):
             if self.middle > ai_contact + self.speed:
                 self.move_up()
@@ -156,6 +160,7 @@ p2 = Player(756, 'right', K_UP, K_DOWN)
 p2.draw()
 
 players = [p1, p2]
+
 #customisable stuff 
 p1.AI = False
 p2.AI = True
@@ -170,7 +175,7 @@ crashed = False
 game = True
 ai_contact = physics_sim(player_lost)
 
-
+# game loop
 while not crashed:
     
     for event in pygame.event.get():
